@@ -29,12 +29,18 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = persons[indexPath.row]
-        
         cell.imageView?.image = UIImage(named: imagePerson[indexPath.row])
-        cell.imageView?.contentMode = .scaleToFill
+        cell.imageView?.layer.cornerRadius = cell.frame.size.height / 3
+        cell.imageView?.clipsToBounds = true
+
         return cell
     }
 
+    // MARK: - Table view delegate
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
 
     // MARK: - Navigation
 
