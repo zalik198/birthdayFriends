@@ -11,9 +11,10 @@ import UIKit
 class TableViewController: UITableViewController {
     
     
-    let persons = ["Шомахова Лилия", "Шомахова Заира", "Шомахов Залимхан"]
-    let imagePerson = ["lilia", "zaira", "zsh"]
     
+   
+    
+    let person = Person.getPersons()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,14 +24,16 @@ class TableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return persons.count
+        return person.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
-        cell.namePerson.text = persons[indexPath.row]
-        cell.imagePerson.image = UIImage(named: imagePerson[indexPath.row])
-        cell.imagePerson.layer.cornerRadius = cell.imagePerson.frame.size.height / 3
+        cell.namePerson.text = person[indexPath.row].name
+        cell.statusPerson.text = person[indexPath.row].status
+        cell.dateBirthday.text = person[indexPath.row].dateBirthday
+        cell.imagePerson.image = UIImage(named: person[indexPath.row].image)
+        cell.imagePerson.layer.cornerRadius = cell.imagePerson.frame.height / 3
         cell.imagePerson.clipsToBounds = true
 
         return cell
