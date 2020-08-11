@@ -15,15 +15,21 @@ class NewPersonTableViewController: UITableViewController {
     @IBOutlet weak var statusTF: UITextField!
     @IBOutlet weak var birthdayTF: UITextField!
     
+    let picker = UIDatePicker()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "back.png"), for: .default)
         tableView.backgroundView = UIImageView(image: UIImage(named: "back.png"))
         
         tableView.tableFooterView = UIView()//скртыие пустых ячеек
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = .init(top: 0, left: 20, bottom: 0, right: 20)
         
-        
+        //imageView
+        imageView.image = UIImage(named: "camera5")
+        imageView.contentMode = .center
        
         
         //MARK: Text fields settings
@@ -34,10 +40,13 @@ class NewPersonTableViewController: UITableViewController {
         statusTF.autocapitalizationType = .sentences
         statusTF.returnKeyType = .done
         birthdayTF.borderStyle = .none
-        birthdayTF.autocapitalizationType = .sentences
+        birthdayTF.inputAccessoryView = picker
         birthdayTF.returnKeyType = .done
         
-        //imageView.backgroundColor = UIColor(patternImage: UIImage(named: "back.png")!)
+        //сделать в другом методе
+        let pickerDate = picker.date
+        birthdayTF.text = String("\(pickerDate)")
+        
 
     
 
@@ -45,11 +54,12 @@ class NewPersonTableViewController: UITableViewController {
         
         
     }
+  
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            
+
         } else {
             view.endEditing(true)
         }
