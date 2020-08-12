@@ -10,10 +10,6 @@ import UIKit
 
 class TableViewController: UITableViewController {
     
-    
-    
-   
-    
     let person = Person.getPersons()
 
     override func viewDidLoad() {
@@ -22,14 +18,17 @@ class TableViewController: UITableViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "back.png"), for: .default)
         
 
-
     }
+    
+
 
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return person.count
     }
+
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
@@ -69,3 +68,4 @@ class TableViewController: UITableViewController {
 
 
 }
+
