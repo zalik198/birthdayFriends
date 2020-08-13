@@ -16,7 +16,7 @@ class NewPersonTableViewController: UITableViewController, UIImagePickerControll
     @IBOutlet weak var statusTF: UITextField!
     @IBOutlet weak var birthdayTF: UITextField!
     
-    let picker = UIDatePicker()
+    let datePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class NewPersonTableViewController: UITableViewController, UIImagePickerControll
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "back.png"), for: .default)
         tableView.backgroundView = UIImageView(image: UIImage(named: "back.png"))
         
-        tableView.tableFooterView = UIView()//скртыие пустых ячеек
+        tableView.tableFooterView = UIView()//скрытие пустых ячеек
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = .init(top: 0, left: 20, bottom: 0, right: 20)
         
@@ -40,14 +40,33 @@ class NewPersonTableViewController: UITableViewController, UIImagePickerControll
         statusTF.borderStyle = .none
         statusTF.autocapitalizationType = .sentences
         statusTF.returnKeyType = .done
-        birthdayTF.borderStyle = .none
-        birthdayTF.inputAccessoryView = picker
+        datePicker.datePickerMode = .date
+        birthdayTF.inputView = datePicker
         birthdayTF.returnKeyType = .done
         
-        //сделать в другом методе
-        let pickerDate = picker.date
-        birthdayTF.text = String("\(pickerDate)")
+        
 
+        //кнопка Готово
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolbar.setItems([flexSpace, doneButton], animated: true)
+        birthdayTF.inputAccessoryView = toolbar
+
+    }
+    
+    //действие при нажатии на Готово
+    @objc func doneAction() {
+        getDateFromPicker()
+        view.endEditing(true)
+    }
+    
+    //формат даты
+    func getDateFromPicker() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        birthdayTF.text = formatter.string(from: datePicker.date)
     }
     
   
