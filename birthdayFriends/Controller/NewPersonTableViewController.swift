@@ -11,7 +11,10 @@ import UIKit
 
 class NewPersonTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
-    @IBOutlet weak var imageView: UIImageView!
+    var newPerson: Person?
+    
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var personImage: UIImageView!
     @IBOutlet weak var nameTF: UITextField!
     @IBOutlet weak var statusTF: UITextField!
     @IBOutlet weak var birthdayTF: UITextField!
@@ -29,8 +32,8 @@ class NewPersonTableViewController: UITableViewController, UIImagePickerControll
         tableView.separatorInset = .init(top: 0, left: 20, bottom: 0, right: 20)
         
         //imageView
-        imageView.image = UIImage(named: "camera5")
-        imageView.contentMode = .center
+        personImage.image = UIImage(named: "camera5")
+        personImage.contentMode = .center
        
         
         //MARK: Text fields settings
@@ -53,7 +56,13 @@ class NewPersonTableViewController: UITableViewController, UIImagePickerControll
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolbar.setItems([flexSpace, doneButton], animated: true)
         birthdayTF.inputAccessoryView = toolbar
-
+        
+        //saveButton доступность при заполнении имени
+        saveButton.isEnabled = false
+        
+        nameTF.addTarget(self, action: #selector(textFieldName), for: .editingChanged)
+        
+        
     }
     
     //действие при нажатии на Готово
@@ -123,13 +132,31 @@ class NewPersonTableViewController: UITableViewController, UIImagePickerControll
     //MARK: - ImagePickerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[.originalImage] as? UIImage {
-            imageView.contentMode = .scaleAspectFit
-            imageView.image = pickedImage
+            personImage.contentMode = .scaleAspectFit
+            personImage.image = pickedImage
         }
         picker.dismiss(animated: true, completion: nil)
     }
+    
+    //если свойство имя не пустое
+    @objc private func textFieldName() {
+        if nameTF.text?.isEmpty == false {
+            saveButton.isEnabled = true
+        } else {
+            saveButton.isEnabled = false
+        }
+    }
+    
+    
+    func saveNewPerson() {
+        newPerson = Person(name: nameTF.text!, status: statusTF.text, dateBirthday: birthdayTF.text, image: personImage.image, personImage: nil)
+    }
+    
   
-
+    @IBAction func cancelAction(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
 
 }
 

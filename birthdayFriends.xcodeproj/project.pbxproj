@@ -12,7 +12,6 @@
 		6211ED6E24D5527C00E6A476 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6211ED6C24D5527C00E6A476 /* Main.storyboard */; };
 		6211ED7324D5528400E6A476 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6211ED7124D5528400E6A476 /* LaunchScreen.storyboard */; };
 		6246BD2824E319CC008AD49A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6246BD2724E319CC008AD49A /* Assets.xcassets */; };
-		627E347A24E1F9E500283B81 /* NewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627E347924E1F9E500283B81 /* NewTableViewCell.swift */; };
 		628F0E9924DA683900D48F32 /* NewPersonTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628F0E9824DA683900D48F32 /* NewPersonTableViewController.swift */; };
 		62C2A4BD24D8A1ED00EC50BF /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2A4BC24D8A1ED00EC50BF /* Model.swift */; };
 		62E9382724D562010012A06D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9382624D562010012A06D /* TableViewController.swift */; };
@@ -27,7 +26,6 @@
 		6211ED7224D5528400E6A476 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6211ED7424D5528400E6A476 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6246BD2724E319CC008AD49A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Assets.xcassets/Assets.xcassets; sourceTree = "<group>"; };
-		627E347924E1F9E500283B81 /* NewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTableViewCell.swift; sourceTree = "<group>"; };
 		628F0E9824DA683900D48F32 /* NewPersonTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPersonTableViewController.swift; sourceTree = "<group>"; };
 		62C2A4BC24D8A1ED00EC50BF /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		62E9382624D562010012A06D /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
@@ -89,7 +87,6 @@
 				6211ED6C24D5527C00E6A476 /* Main.storyboard */,
 				6211ED7124D5528400E6A476 /* LaunchScreen.storyboard */,
 				62E9382824D7BEF50012A06D /* CustomTableViewCell.swift */,
-				627E347924E1F9E500283B81 /* NewTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -176,7 +173,6 @@
 			files = (
 				62C2A4BD24D8A1ED00EC50BF /* Model.swift in Sources */,
 				62E9382924D7BEF50012A06D /* CustomTableViewCell.swift in Sources */,
-				627E347A24E1F9E500283B81 /* NewTableViewCell.swift in Sources */,
 				6211ED6724D5527C00E6A476 /* AppDelegate.swift in Sources */,
 				6211ED6924D5527C00E6A476 /* SceneDelegate.swift in Sources */,
 				62E9382724D562010012A06D /* TableViewController.swift in Sources */,

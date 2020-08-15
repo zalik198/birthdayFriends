@@ -247,15 +247,20 @@
                     <navigationItem key="navigationItem" title="New person" id="7W9-un-pUf">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="duR-Mv-bZr">
                             <connections>
-                                <segue destination="unt-5b-uYw" kind="unwind" unwindAction="cancel:" id="ySw-WV-Rxa"/>
+                                <action selector="cancelAction:" destination="cq7-Bb-MXf" id="RRx-Xz-gEF"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="1QP-Sj-kIJ"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="1QP-Sj-kIJ">
+                            <connections>
+                                <segue destination="unt-5b-uYw" kind="unwind" unwindAction="unwindSegue:" id="Mgy-xd-oLh"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="birthdayTF" destination="w5a-T4-XhX" id="h5c-Xc-aH4"/>
-                        <outlet property="imageView" destination="GwI-zr-LGK" id="8vM-iB-arx"/>
                         <outlet property="nameTF" destination="rty-aD-amX" id="f1v-1R-4Kf"/>
+                        <outlet property="personImage" destination="GwI-zr-LGK" id="8vM-iB-arx"/>
+                        <outlet property="saveButton" destination="1QP-Sj-kIJ" id="FL8-Kw-Saf"/>
                         <outlet property="statusTF" destination="DzM-lu-4E0" id="gLQ-Lc-tqn"/>
                     </connections>
                 </tableViewController>

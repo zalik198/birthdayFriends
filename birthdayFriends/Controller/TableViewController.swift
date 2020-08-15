@@ -10,12 +10,14 @@ import UIKit
 
 class TableViewController: UITableViewController {
     
-    let person = Person.getPersons()
+    var person = Person.getPersons()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundView = UIImageView(image: UIImage(named: "back.png"))
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "back.png"), for: .default)
+        
+        
         
 
     }
@@ -32,11 +34,20 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
-        cell.namePerson.text = person[indexPath.row].name
+        
+        let newPersons = person[indexPath.row]
+        
+        cell.namePerson.text = newPersons.name
         cell.namePerson.font = .boldSystemFont(ofSize: 19)
-        cell.statusPerson.text = person[indexPath.row].status
-        cell.dateBirthday.text = person[indexPath.row].dateBirthday
-        cell.imagePerson.image = UIImage(named: person[indexPath.row].image)
+        cell.statusPerson.text = newPersons.status
+        cell.dateBirthday.text = newPersons.dateBirthday
+        
+        if newPersons.image == nil {
+            cell.imagePerson.image = UIImage(named: newPersons.personImage!)
+        } else {
+            cell.imagePerson.image = newPersons.image
+        }
+        
         cell.imagePerson.layer.cornerRadius = cell.imagePerson.frame.height / 3
         cell.imagePerson.clipsToBounds = true
         
@@ -50,21 +61,19 @@ class TableViewController: UITableViewController {
         return cell
     }
 
-    // MARK: - Table view delegate
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
+
 
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
     
-    @IBAction func cancel(_ segue: UIStoryboardSegue) {}
+    @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
+        
+        guard let newPersonVC = segue.source as? NewPersonTableViewController else { return }
+        newPersonVC.saveNewPerson()
+        person.append(newPersonVC.newPerson!)
+        tableView.reloadData()
+        
+    }
 
 
 }
