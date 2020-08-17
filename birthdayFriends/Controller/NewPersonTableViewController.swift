@@ -83,13 +83,13 @@ class NewPersonTableViewController: UITableViewController, UIImagePickerControll
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            let alert = UIAlertController(title: "Choos Image", message: nil, preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+            let alert = UIAlertController(title: "Выберите изображение", message: nil, preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Камера", style: .default, handler: { _ in
                 self.openCamera()
             }))
-            alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+            alert.addAction(UIAlertAction(title: "Фото", style: .default, handler: { _ in
                 self.openGallery()}))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
             
             self.present(alert, animated: true, completion: nil)
             
@@ -166,7 +166,15 @@ extension NewPersonTableViewController: UITextFieldDelegate {
     
     //скрытие клавы по нажатию на Готово
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        if textField == nameTF {
+            textField.resignFirstResponder()
+            statusTF.becomeFirstResponder()
+        } else if textField == statusTF {
+            textField.resignFirstResponder()
+            birthdayTF.becomeFirstResponder()
+        } else if textField == birthdayTF {
+            textField.resignFirstResponder()
+        }
         return true
     }
     

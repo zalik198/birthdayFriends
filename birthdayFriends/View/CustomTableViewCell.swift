@@ -14,5 +14,6 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var namePerson: UILabel!
     @IBOutlet weak var statusPerson: UILabel!
     @IBOutlet weak var dateBirthday: UILabel!
+    @IBOutlet weak var sentMessage: UIButton!
     
 }

@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import MessageUI
 
-class TableViewController: UITableViewController {
+class TableViewController: UITableViewController, MFMessageComposeViewControllerDelegate {
+  
+    
     
     var person = Person.getPersons()
 
@@ -50,13 +53,7 @@ class TableViewController: UITableViewController {
         
         cell.imagePerson.layer.cornerRadius = cell.imagePerson.frame.height / 3
         cell.imagePerson.clipsToBounds = true
-        
-        
-        //fon cell
-        //cell.backgroundColor = UIColor(patternImage: UIImage(named: "back.png")!)
         cell.backgroundColor = .clear
-
-        
 
         return cell
     }
@@ -74,7 +71,22 @@ class TableViewController: UITableViewController {
         tableView.reloadData()
         
     }
-
-
+    
+    @IBAction func messageAction(_ sender: UIButton) {
+        if MFMessageComposeViewController.canSendText() == true {
+            let sms:[String] = [""]//номер
+            let messageController = MFMessageComposeViewController()
+            messageController.messageComposeDelegate = self
+            messageController.recipients = sms
+            messageController.body = "С днем рождения!"//текст
+            self.present(messageController, animated: true, completion: nil)
+        } else {
+            print("hi")
+        }
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        controller.dismiss(animated: true, completion: nil)
+      }
 }
 
