@@ -8,6 +8,7 @@
 //Сделать красивым этот экран
 
 import UIKit
+import CoreData
 
 class NewPersonTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
