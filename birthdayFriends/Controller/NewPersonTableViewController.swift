@@ -8,7 +8,6 @@
 //Сделать красивым этот экран
 
 import UIKit
-import CoreData
 
 class NewPersonTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
@@ -48,7 +47,6 @@ class NewPersonTableViewController: UITableViewController, UIImagePickerControll
         birthdayTF.inputView = datePicker
         birthdayTF.returnKeyType = .done
         
-        
 
         //кнопка Готово
         let toolbar = UIToolbar()
@@ -60,10 +58,8 @@ class NewPersonTableViewController: UITableViewController, UIImagePickerControll
         
         //saveButton доступность при заполнении имени
         saveButton.isEnabled = false
-        
         nameTF.addTarget(self, action: #selector(textFieldName), for: .editingChanged)
-        
-        
+     
     }
     
     //действие при нажатии на Готово
@@ -78,10 +74,7 @@ class NewPersonTableViewController: UITableViewController, UIImagePickerControll
         formatter.dateFormat = "dd.MM.yyyy"
         birthdayTF.text = formatter.string(from: datePicker.date)
     }
-    
   
-    
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             let alert = UIAlertController(title: "Выберите изображение", message: nil, preferredStyle: .actionSheet)
@@ -98,7 +91,6 @@ class NewPersonTableViewController: UITableViewController, UIImagePickerControll
             view.endEditing(true)
         }
     }
-    
     
     //OpenCameraAction
     func openCamera() {

@@ -14,9 +14,9 @@ class TableViewController: UITableViewController, MFMessageComposeViewController
     
     var person = Person.getPersons()
     var people: [Birthday] = []
+    
+    let defImage = UIImage(named: "camera5")
 
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,6 @@ class TableViewController: UITableViewController, MFMessageComposeViewController
     }
 
     
-    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -52,39 +51,43 @@ class TableViewController: UITableViewController, MFMessageComposeViewController
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         let newPersons = people[indexPath.row]
-        
         cell.namePerson.text = newPersons.name
         cell.namePerson.font = .boldSystemFont(ofSize: 19)
         cell.statusPerson.text = newPersons.status
         cell.dateBirthday.text = newPersons.dateBirthday
         
-//        if newPersons.image == nil {
-//            cell.imagePerson.image = UIImage(named: newPersons.personImage!)
-//        } else {
-//            cell.imagePerson.image = newPersons.image
-//        }
         
+        
+        //selected cell
+        let backgroundColorView = UIView()
+        backgroundColorView.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.2362961345, green: 0.9618863342, blue: 0.9818531826, alpha: 0.5))
+        UITableViewCell.appearance().selectedBackgroundView = backgroundColorView
+
         cell.imagePerson.layer.cornerRadius = cell.imagePerson.frame.height / 3
         cell.imagePerson.clipsToBounds = true
         cell.backgroundColor = .clear
-
+        cell.imagePerson.image?.jpegData(compressionQuality: 1.0)
+        
+        //action change image
+        if newPersons.image == nil {
+            cell.imagePerson.image = defImage
+        } else {
+            cell.imagePerson.image = UIImage(data: newPersons.image!)
+        }
+        
         return cell
     }
 
 
 
     // MARK: - Navigation
-
-    
     @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
-      
-        
         guard let newPersonVC = segue.source as? NewPersonTableViewController else { return }
         newPersonVC.saveNewPerson()
         person.append(newPersonVC.newPerson!)
         tableView.reloadData()
         
-    
+
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
             
@@ -94,16 +97,19 @@ class TableViewController: UITableViewController, MFMessageComposeViewController
         taskObject.status = newPersonVC.statusTF.text
         taskObject.dateBirthday = newPersonVC.birthdayTF.text
         
-                
-                do {
-                    try context.save()
-                    people.append(taskObject)
-                    tableView.reloadData()
-                } catch let error as NSError {
-                    print(error.localizedDescription)
-                }
+        //image convert to Data
+        let imageData = newPersonVC.personImage.image?.pngData()
+        taskObject.image = imageData
         
-    
+        
+        
+        do {
+            try context.save()
+            people.append(taskObject)
+            tableView.reloadData()
+        } catch let error as NSError {
+            print(error.localizedDescription)
+                }
     }
     
     

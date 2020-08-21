@@ -3,7 +3,7 @@
     <entity name="Birthday" representedClassName="Birthday" syncable="YES" codeGenerationType="class">
         <attribute name="dateBirthday" optional="YES" attributeType="String"/>
         <attribute name="image" optional="YES" attributeType="Binary"/>
-        <attribute name="imagePerson" optional="YES" attributeType="String"/>
+        <attribute name="imagePerson" optional="YES" attributeType="String" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="status" optional="YES" attributeType="String"/>
     </entity>
