@@ -49,6 +49,8 @@ class TableViewController: UITableViewController, MFMessageComposeViewController
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard people.count > indexPath.row else { return UITableViewCell() }
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         let newPersons = people[indexPath.row]
         cell.namePerson.text = newPersons.name
@@ -106,13 +108,37 @@ class TableViewController: UITableViewController, MFMessageComposeViewController
         do {
             try context.save()
             people.append(taskObject)
-            tableView.reloadData()
         } catch let error as NSError {
             print(error.localizedDescription)
                 }
+        tableView.reloadData()
+
     }
     
+    //Delete data from coreData
+    @IBAction func deleteCoreData(_ sender: Any) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchReq:NSFetchRequest<Birthday> = Birthday.fetchRequest()
+        
+        if let days = try? context.fetch(fetchReq) {
+            for day in days {
+                context.delete(day)
+            }
+        }
+        
+        self.people.removeAll()
+
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print(error.localizedDescription)
+                }
+        tableView.reloadData()
+
+    }
     
+    //sms
     @IBAction func messageAction(_ sender: UIButton) {
         if MFMessageComposeViewController.canSendText() == true {
             let sms:[String] = [""]//номер

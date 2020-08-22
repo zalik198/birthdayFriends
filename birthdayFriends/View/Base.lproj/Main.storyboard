@@ -101,6 +101,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Birthday" id="IlJ-ef-pBu">
+                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="AqQ-Ex-ZbG">
+                            <connections>
+                                <action selector="deleteCoreData:" destination="GH5-an-8wu" id="xDU-jZ-lag"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="GsI-Ew-qA2">
                             <connections>
                                 <segue destination="ach-hg-10T" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="mSN-t9-Yh0"/>
