@@ -11,6 +11,8 @@ import UIKit
 
 class NewPersonTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
+    var currentPerson: Birthday?
+    
     var newPerson: Person?
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -127,6 +129,7 @@ class NewPersonTableViewController: UITableViewController, UIImagePickerControll
         if let pickedImage = info[.originalImage] as? UIImage {
             personImage.contentMode = .scaleAspectFit
             personImage.image = pickedImage
+                
         }
         picker.dismiss(animated: true, completion: nil)
     }
@@ -144,6 +147,7 @@ class NewPersonTableViewController: UITableViewController, UIImagePickerControll
     func saveNewPerson() {
         newPerson = Person(name: nameTF.text!, status: statusTF.text, dateBirthday: birthdayTF.text, image: personImage.image, personImage: nil)
     }
+    
     
   
     @IBAction func cancelAction(_ sender: Any) {
@@ -173,3 +177,6 @@ extension NewPersonTableViewController: UITextFieldDelegate {
     
 
 }
+
+
+

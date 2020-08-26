@@ -14,14 +14,15 @@ class TableViewController: UITableViewController, MFMessageComposeViewController
     
     var person = Person.getPersons()
     var people: [Birthday] = []
-    
     let defImage = UIImage(named: "camera5")
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundView = UIImageView(image: UIImage(named: "back.png"))
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "back.png"), for: .default)
+        
+        
+        
         
     }
     
@@ -40,7 +41,6 @@ class TableViewController: UITableViewController, MFMessageComposeViewController
         }
         
     }
-
     
     // MARK: - Table view data source
 
@@ -58,8 +58,6 @@ class TableViewController: UITableViewController, MFMessageComposeViewController
         cell.statusPerson.text = newPersons.status
         cell.dateBirthday.text = newPersons.dateBirthday
         
-        
-        
         //selected cell
         let backgroundColorView = UIView()
         backgroundColorView.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.2362961345, green: 0.9618863342, blue: 0.9818531826, alpha: 0.5))
@@ -70,6 +68,11 @@ class TableViewController: UITableViewController, MFMessageComposeViewController
         cell.backgroundColor = .clear
         cell.imagePerson.image?.jpegData(compressionQuality: 1.0)
         
+        
+        //поворот фоток с камеры на 90 градусов
+        //cell.imagePerson.transform = CGAffineTransform(rotationAngle: .pi / 2)
+        
+        
         //action change image
         if newPersons.image == nil {
             cell.imagePerson.image = defImage
@@ -77,12 +80,29 @@ class TableViewController: UITableViewController, MFMessageComposeViewController
             cell.imagePerson.image = UIImage(data: newPersons.image!)
         }
         
+
+        
         return cell
     }
-
-
+    
+    //действие по свайпу ячейки
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+       
+        if editingStyle == .delete {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let context = appDelegate.persistentContainer.viewContext
+            
+            context.delete(people[indexPath.row])
+            appDelegate.saveContext()
+            people.remove(at: indexPath.row)
+            tableView.reloadData()
+            
+        }
+    
+    }
 
     // MARK: - Navigation
+    
     @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
         guard let newPersonVC = segue.source as? NewPersonTableViewController else { return }
         newPersonVC.saveNewPerson()
@@ -102,35 +122,11 @@ class TableViewController: UITableViewController, MFMessageComposeViewController
         //image convert to Data
         let imageData = newPersonVC.personImage.image?.pngData()
         taskObject.image = imageData
-        
-        
-        
+    
+      
         do {
             try context.save()
             people.append(taskObject)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-                }
-        tableView.reloadData()
-
-    }
-    
-    //Delete data from coreData
-    @IBAction func deleteCoreData(_ sender: Any) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let fetchReq:NSFetchRequest<Birthday> = Birthday.fetchRequest()
-        
-        if let days = try? context.fetch(fetchReq) {
-            for day in days {
-                context.delete(day)
-            }
-        }
-        
-        self.people.removeAll()
-
-        do {
-            try context.save()
         } catch let error as NSError {
             print(error.localizedDescription)
                 }
@@ -155,5 +151,10 @@ class TableViewController: UITableViewController, MFMessageComposeViewController
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         controller.dismiss(animated: true, completion: nil)
       }
+    
+    
+
 }
+
+
 

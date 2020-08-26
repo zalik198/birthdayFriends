@@ -101,11 +101,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Birthday" id="IlJ-ef-pBu">
-                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="AqQ-Ex-ZbG">
-                            <connections>
-                                <action selector="deleteCoreData:" destination="GH5-an-8wu" id="xDU-jZ-lag"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="GsI-Ew-qA2">
                             <connections>
                                 <segue destination="ach-hg-10T" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="mSN-t9-Yh0"/>
@@ -287,7 +282,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wgQ-AK-9re" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="unt-5b-uYw" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2662.3188405797105" y="49.553571428571423"/>
+            <point key="canvasLocation" x="1777" y="56"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FnX-fF-U2e">
@@ -332,7 +327,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fcE-7T-enN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1753.6231884057972" y="49.553571428571423"/>
+            <point key="canvasLocation" x="1777" y="-631"/>
         </scene>
     </scenes>
     <resources>
