@@ -16,14 +16,12 @@ class TableViewController: UITableViewController, MFMessageComposeViewController
     var people: [Birthday] = []
     let defImage = UIImage(named: "camera5")
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundView = UIImageView(image: UIImage(named: "back.png"))
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "back.png"), for: .default)
-        
-        
-        
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,9 +77,7 @@ class TableViewController: UITableViewController, MFMessageComposeViewController
         } else {
             cell.imagePerson.image = UIImage(data: newPersons.image!)
         }
-        
-
-        
+    
         return cell
     }
     
@@ -98,7 +94,6 @@ class TableViewController: UITableViewController, MFMessageComposeViewController
             tableView.reloadData()
             
         }
-    
     }
 
     // MARK: - Navigation
@@ -147,12 +142,10 @@ class TableViewController: UITableViewController, MFMessageComposeViewController
             print("hi")
         }
     }
-    
+ 
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         controller.dismiss(animated: true, completion: nil)
       }
-    
-    
 
 }
 
